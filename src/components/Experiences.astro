@@ -1,3 +1,181 @@
----
-$END$
----
+<section class="experiences-section" id="experiences-section">
+  <div class="grid-item item1">
+    <div class="grid-overlay">
+      <span>
+        <h1>The Alps</h1>
+        <p>Texto bien bonito sobre los alpes sucios</p>
+      </span>
+    </div>
+  </div>
+  <div class="grid-item item2">
+   <h2>
+    Breathtaking serene beauty.
+   </h2>
+   <p>
+    A slice of paradise where snow-capped peaks kiss the sky and tranquil villages nestle in lush valleys. 
+   </p>
+  </div>
+  <div class="grid-item item3">
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="grid-item item4">
+    Discover more
+  </div>
+
+  <div class="grid-item item6">
+    <h2 >Explore </h2>
+  </div>
+  <div class="grid-item item7">
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="grid-item item8">
+    Stay
+  </div>
+  <div class="grid-item item9">
+    <div class="grid-overlay">
+
+    </div>
+  </div>
+  <div class="grid-item item10">
+    <div class="grid-overlay"></div>
+  </div>
+</section>
+
+<style>
+  .experiences-section {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+    background: linear-gradient(to bottom, #384217ff, #788a4fff);;
+  }
+
+  .grid-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 8px;
+  }
+  .grid-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+  }
+  .grid-item span {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    mix-blend-mode: luminosity;
+  }
+  .grid-item h1 {
+    font-size: 40px;
+    font-weight: bolder;
+  }
+  .grid-item p {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .item1 {
+    background-image: url("../assets/grid-001.jpg");
+    background-size: cover;
+    object-fit: fill;
+    grid-column: 1 / 3;
+    grid-row: 1 / 4;
+  }
+
+  .item2 {
+    background-color: #384217ff;
+    grid-column: 1;
+    grid-row: 4 / 6;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+  }
+
+  .item2 h2 {
+    font-size: 20px;
+    font-weight: bolder;
+    width: 100%;
+  }
+  .item2 p {
+    font-size: 16px;
+    font-weight: lighter;
+  }
+
+  .item3 {
+    background-image: url("../assets/grid-004.jpg");
+    background-size: cover;
+    object-fit: fill;
+    grid-column: 2;
+    grid-row: 4 / 6;
+  }
+
+  .item4 {
+    background: linear-gradient(to right, #384217ff, #788a4fff);
+    grid-column: 1 / 3;
+    grid-row: 6;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px;
+  }
+
+  .item6 {
+    background-color: #788a4fff;
+    grid-column: 3;
+    grid-row: 1 / 2;
+        height: 100%;
+    width: 100%;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px;
+  }
+  .item7 {
+    background-image: url("../assets/grid-006.jpg");
+    background-size: cover;
+    object-fit: fill;
+    grid-column: 3;
+    grid-row: 2 / 6;
+  }
+  .item8 {
+    background-color: #384217ff;
+    grid-column: 3;
+    grid-row:6 / 7;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px
+  }
+  .item9 {
+    background-image: url("../assets/grid-002.jpg");
+    background-size: cover;
+    object-fit: fill;
+    grid-column: 4;
+    grid-row: span 3;
+  }
+  .item10 {
+    background-image: url("../assets/grid-005.jpg");
+    background-size: cover;
+    object-fit: fill;
+    grid-column: 4;
+    grid-row: span 3;
+  }
+</style>

@@ -49,7 +49,9 @@
     scroll-snap-type: y mandatory;
   }
 
-
+  .hidden {
+    display: none;
+  }
   .destiny-name {
     font-size: 10vw;
     font-weight: 900;
@@ -111,14 +113,17 @@
           const destiniesVisible = entries[0].isIntersecting;
 
           if (!destiniesVisible) {
-            destinyName.textContent = ""; // Limpia el texto cuando no está visible
+            destinyName.textContent = "";
+            circles.forEach((circle) => {
+              circle.classList.add("hidden");
+            });
           }
         },
-        { threshold: 0.1 } // Detecta con al menos 10% de visibilidad
+        { threshold: 0.1 }
     );
 
     observer.observe(destiniesContainer);
-    sections.forEach((section, index) => {
+    sections.forEach((section: any, index) => {
       const rect = section.getBoundingClientRect();
 
       if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
@@ -126,6 +131,7 @@
 
         circles.forEach((circle, i) => {
           if (i  ===  index) {
+            circle.classList.remove("hidden");
             circle.classList.add("active")
           } else {
             circle.classList.remove("active");
