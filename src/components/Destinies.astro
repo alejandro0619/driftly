@@ -1,38 +1,55 @@
 ---
 const destinations = [
   {
-    name: "Paris",
-    image: "/src/assets/landscape-003.jpg", // Primera imagen
+    name: "Hawaii",
+    image: "/src/assets/hawaii.jpg", 
   },
   {
-    name: "New York",
-    image: "/src/assets/landscape-003.jpg", // Segunda imagen
+    name: "Sahara",
+    image: "/src/assets/sahara.jpg", 
+  },
+  {
+    name: "Osaka",
+    image: "/src/assets/osaka.jpg", 
+  },
+  {
+    name: "London",
+    image: "/src/assets/landscape-006.jpg", 
   },
 ];
 ---
 
 <style>
+  .title {
+    position: absolute;
+    top: 10%;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: start;
+  }
   .destinies {
     width: 100%;
     height: 100vh;
-    background-image: url("/src/assets/landscape-003.jpg");
+    background-image: url("/src/assets/landscape-003.jpg"); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: background-image 1s ease-in-out; /* Agregado para la transición */
+    transition: background-image 1s ease-in-out; 
     position: relative;
   }
 
   .destinies-overlay {
-    width: 40%;
+    width: 30%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo opaco */
+    background-color: rgba(0, 0, 0, 0.6); 
     position: absolute;
     left: 0;
     top: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 20px;
     gap: 15px;
   }
@@ -47,40 +64,74 @@ const destinations = [
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    width: 200px;
   }
 
   .destination-btn:hover {
     background: #fff;
     color: #000;
-    transform: scale(1.1); /* Agrandamiento en hover */
+    transform: scale(1.1); 
   }
+  .destiny-name {
+    font-size: 10vw; 
+    font-weight: 900;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ffffff, #eaeaea, #f9f9f9); 
+    background-size: cover;
+    background-position: center;
+    -webkit-background-clip: text; 
+    color: transparent; 
+    text-align: center;
+
+}
 </style>
+
 <script>
-  function changeBackground(event: any) {
-    console.log("jskjdfsklfsdd")
-    const destiniesContainer = document.getElementById('destinies-container') as HTMLDivElement;
-    const destinationImage = event.target.textContent;  // Obtener el nombre del destino
+  document.addEventListener("DOMContentLoaded", () => {
+    const btns = document.querySelectorAll(".destination-btn") as NodeListOf<HTMLButtonElement>;
+    const destiniesContainer = document.getElementById("destinies-container") as HTMLDivElement;
+    const destinyName = document.querySelector(".destiny-name") as HTMLParagraphElement;
 
-    let imageUrl = '';
-    if (destinationImage === 'Paris') {
-      imageUrl = '/src/assets/landscape-003.jpg';
-    } else if (destinationImage === 'New York') {
-      imageUrl = '/src/assets/landscape-001.webp';
-    }
+    const destinations = [
+      { name: "Hawaii", image: "/src/assets/hawaii.jpg" },
+      { name: "Sahara", image: "/src/assets/sahara.jpg" },
+      { name: "Osaka", image: "/src/assets/osaka.jpg" },
+      { name: "London", image: "/src/assets/landscape-006.jpg" },
+    ];
 
-    destiniesContainer.style.backgroundImage = `url(${imageUrl})`;
-  }
+    btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const destinationName = btn.textContent?.trim();
+
+        const destination = destinations.find(
+          (dest) => dest.name === destinationName
+        );
+
+        if (destination) {
+          
+          destiniesContainer.style.backgroundImage = `url(${destination.image})`;
+          
+          destinyName.textContent = destination.name;
+          
+        }
+      });
+    });
+  });
 </script>
-<div class="destinies" id="destinies-container" data-background="Paris">
+
+<div class="destinies" id="destinies-container">
   <div class="destinies-overlay">
+    <h1 class="title">Choose your next journey</h1>
+
+
     {destinations.map((destination) => (
-      <button 
-        class="destination-btn"
-        onclick={changeBackground(event)}>
-        {destination.name}
-      </button>
+      <button class="destination-btn">{destination.name}</button>
     ))}
   </div>
+
+  <p class="destiny-name">Sydney</p>
 </div>
-
-
