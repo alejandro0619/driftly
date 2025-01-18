@@ -1,137 +1,98 @@
----
-const destinations = [
-  {
-    name: "Hawaii",
-    image: "/src/assets/hawaii.jpg", 
-  },
-  {
-    name: "Sahara",
-    image: "/src/assets/sahara.jpg", 
-  },
-  {
-    name: "Osaka",
-    image: "/src/assets/osaka.jpg", 
-  },
-  {
-    name: "London",
-    image: "/src/assets/landscape-006.jpg", 
-  },
-];
----
+<div class="destinies" id="destinies-container">
+  <p class="destiny-name" id="destiny-name"></p>
+
+
+  <div class="destination-section" data-destination="Hawaii" id="destinies-start"></div>
+  <div class="destination-section" data-destination="Sahara" ></div>
+  <div class="destination-section" data-destination="Osaka"></div>
+  <div class="destination-section" data-destination="London"></div>
+</div>
 
 <style>
-  .title {
-    position: absolute;
-    top: 10%;
-    color: #fff;
-    font-size: 20px;
-    font-weight: bolder;
-    text-align: start;
-  }
+
   .destinies {
+    position: relative;
     width: 100%;
+    height: auto;
+    overflow: hidden;
+    z-index: 10;
+    scroll-snap-type: y mandatory;
+  }
+
+
+  .destiny-name {
+    font-size: 10vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ffffff, #eaeaea, #f9f9f9);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    transition: all 0.3s ease-in-out;
+  }
+
+
+  .destination-section {
     height: 100vh;
-    background-image: url("/src/assets/landscape-003.jpg"); 
+    width: 100%;
+    scroll-snap-align: center;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    transition: background-image 1s ease-in-out; 
     position: relative;
   }
 
-  .destinies-overlay {
-    width: 30%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); 
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    gap: 15px;
+  .destination-section:nth-child(2) {
+    background-image: url("/src/assets/hawaii.jpg");
   }
 
-  .destination-btn {
-    background: transparent;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    width: 200px;
+  .destination-section:nth-child(3) {
+    background-image: url("/src/assets/sahara.jpg");
   }
 
-  .destination-btn:hover {
-    background: #fff;
-    color: #000;
-    transform: scale(1.1); 
+  .destination-section:nth-child(4) {
+    background-image: url("/src/assets/osaka.jpg");
   }
-  .destiny-name {
-    font-size: 10vw; 
-    font-weight: 900;
-    position: absolute;
-    bottom: 5%;
-    right: 5%;
 
-    text-transform: uppercase;
-    background: linear-gradient(90deg, #ffffff, #eaeaea, #f9f9f9); 
-    background-size: cover;
-    background-position: center;
-    -webkit-background-clip: text; 
-    color: transparent; 
-    text-align: center;
+  .destination-section:nth-child(5) {
+    background-image: url("/src/assets/landscape-006.jpg");
+  }
 
-}
+
+  html {
+    scroll-behavior: smooth;
+  }
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const btns = document.querySelectorAll(".destination-btn") as NodeListOf<HTMLButtonElement>;
-    const destiniesContainer = document.getElementById("destinies-container") as HTMLDivElement;
-    const destinyName = document.querySelector(".destiny-name") as HTMLParagraphElement;
 
-    const destinations = [
-      { name: "Hawaii", image: "/src/assets/hawaii.jpg" },
-      { name: "Sahara", image: "/src/assets/sahara.jpg" },
-      { name: "Osaka", image: "/src/assets/osaka.jpg" },
-      { name: "London", image: "/src/assets/landscape-006.jpg" },
-    ];
+  document.addEventListener("scroll", () => {
+    const destiniesContainer = document.getElementById("destinies-container") as HTMLElement;
+    const sections = document.querySelectorAll(".destination-section") as NodeListOf<Element>;
+    const destinyName = document.getElementById("destiny-name") as HTMLElement;
 
-    btns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const destinationName = btn.textContent?.trim();
+    const observer = new IntersectionObserver(
+        (entries) => {
+          const destiniesVisible = entries[0].isIntersecting;
 
-        const destination = destinations.find(
-          (dest) => dest.name === destinationName
-        );
+          if (!destiniesVisible) {
+            destinyName.textContent = ""; // Limpia el texto cuando no está visible
+          }
+        },
+        { threshold: 0.1 } // Detecta con al menos 10% de visibilidad
+    );
 
-        if (destination) {
-          
-          destiniesContainer.style.backgroundImage = `url(${destination.image})`;
-          
-          destinyName.textContent = destination.name;
-          
-        }
-      });
+    observer.observe(destiniesContainer);
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+
+      if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+        destinyName.textContent = section.dataset.destination;
+      }
     });
   });
 </script>
-
-<div class="destinies" id="destinies-container">
-  <div class="destinies-overlay">
-    <h1 class="title">Choose your next journey</h1>
-
-
-    {destinations.map((destination) => (
-      <button class="destination-btn">{destination.name}</button>
-    ))}
-  </div>
-
-  <p class="destiny-name">Sydney</p>
-</div>
