@@ -6,10 +6,40 @@
   <div class="destination-section" data-destination="Sahara" ></div>
   <div class="destination-section" data-destination="Osaka"></div>
   <div class="destination-section" data-destination="London"></div>
+
+  <div class="list">
+    <span class="list-circle"></span>
+    <span class="list-circle"></span>
+    <span class="list-circle"></span>
+    <span class="list-circle"></span>
+  </div>
+
 </div>
 
 <style>
+  .list {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+  }
 
+  .list-circle {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    opacity: 0.5;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .list-circle.active {
+    opacity: 1;
+    transform: scale(1.2);
+  }
   .destinies {
     position: relative;
     width: 100%;
@@ -74,6 +104,7 @@
     const destiniesContainer = document.getElementById("destinies-container") as HTMLElement;
     const sections = document.querySelectorAll(".destination-section") as NodeListOf<Element>;
     const destinyName = document.getElementById("destiny-name") as HTMLElement;
+    const circles = document.querySelectorAll(".list-circle")  as NodeListOf<Element>;
 
     const observer = new IntersectionObserver(
         (entries) => {
@@ -87,11 +118,19 @@
     );
 
     observer.observe(destiniesContainer);
-    sections.forEach((section) => {
+    sections.forEach((section, index) => {
       const rect = section.getBoundingClientRect();
 
       if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
         destinyName.textContent = section.dataset.destination;
+
+        circles.forEach((circle, i) => {
+          if (i  ===  index) {
+            circle.classList.add("active")
+          } else {
+            circle.classList.remove("active");
+          }
+        })
       }
     });
   });
