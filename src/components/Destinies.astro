@@ -1,5 +1,5 @@
 <div class="destinies" id="destinies-container">
-  <p class="destiny-name" id="destiny-name"></p>
+  <p class="destiny-name" id="destiny-name"> HAWAII</p>
 
 
   <div class="destination-section" data-destination="Hawaii" id="destinies-start"></div>
@@ -125,7 +125,7 @@
     observer.observe(destiniesContainer);
     sections.forEach((section: any, index) => {
       const rect = section.getBoundingClientRect();
-
+      
       if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
         destinyName.textContent = section.dataset.destination;
 
