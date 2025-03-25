@@ -1,3 +1,7 @@
+---
+const title = "Driftly";
+---
+
 <!-- TODO: Add more experiences sections with other destinies here. -->
 <section class="experiences-section" id="experiences-section">
   <div class="grid-item item1">
@@ -19,19 +23,29 @@
   <div class="grid-item item3">
     <div class="grid-overlay"></div>
   </div>
-  <div class="grid-item item4">
-    Discover more
-  </div>
 
-  <div class="grid-item item6">
-    <h2 >Explore </h2>
-  </div>
+<a href="/destinies" class="grid-item item4">
+    Discover more destinies
+</a>
+
+
+
+
+  
+  <a href="/" class="grid-item item6">
+      Home
+  </a>
+
+
   <div class="grid-item item7">
     <div class="grid-overlay"></div>
   </div>
-  <div class="grid-item item8">
-    Stay
-  </div>
+
+  <a href="/" class="grid-item item8">
+      <h2>Book a trip</h2>
+  </a>
+
+
   <div class="grid-item item9">
     <div class="grid-overlay">
 
@@ -183,5 +197,35 @@
     object-fit: fill;
     grid-column: 4;
     grid-row: span 3;
+  }
+
+
+  #navbar {
+    margin-top: 0.25em;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    width: 100%;
+    height: fit-content;
+    position: fixed;
+    top: 0;
+    transition: all 0.5s ease-in-out;
+    z-index: 300;
+  }
+  #navbar h1 {
+    font-weight: bolder;
+    font-size: 38px;
+    color: #384217ff;
+  }
+
+  #navbar span {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
 </style>
